@@ -58,6 +58,69 @@ namespace itis {
       z->degree++;
     }
 
+    /** The subroutine. It is used within Union method and some other methods.
+     * If the root lists of H1 and H2 have m roots altogether, Merge runs in O(m) time.
+     *
+     * @param H1 is first binomial heap to be merged
+     * @param H2 is second binomial heap to be merged
+     * @return the pointer to a root list (of a new binomial heap)
+     * that is sorted by monotonically increasing degree
+     */
+    Node *BinomialHeapMerge(BinomialHeap H1, BinomialHeap H2) {
+      auto H = BinomialHeap();
+      Node *cur_root_H1 = H1.head_;
+      Node *cur_root_H2 = H2.head_;
+      Node *cur_root_H = head_;
+
+      if ((cur_root_H1 != nullptr) && (cur_root_H2 != nullptr)) {
+        if (cur_root_H1->degree < cur_root_H2->degree) {
+          H.head_ = cur_root_H1;
+          cur_root_H1 = cur_root_H1->sibling;
+        } else {
+          H.head_ = cur_root_H2;
+          cur_root_H2 = cur_root_H2->sibling;
+        }
+        cur_root_H = head_->sibling;
+      }
+
+      while (cur_root_H1 != nullptr || cur_root_H2 != nullptr) {
+        if (cur_root_H1->degree < cur_root_H2->degree) {
+          cur_root_H = cur_root_H1;
+          cur_root_H1 = cur_root_H1->sibling;
+        }
+        else {
+          cur_root_H = cur_root_H2;
+          cur_root_H2 = cur_root_H2->sibling;
+        }
+        cur_root_H = cur_root_H->sibling;
+      }
+
+      while (cur_root_H1 != nullptr) {
+        cur_root_H = cur_root_H1;
+        cur_root_H1 = cur_root_H1->sibling;
+        cur_root_H = cur_root_H->sibling;
+      }
+
+      while (cur_root_H2 != nullptr) {
+        cur_root_H = cur_root_H2;
+        cur_root_H2 = cur_root_H2->sibling;
+        cur_root_H = cur_root_H->sibling;
+      }
+
+      BinomialHeapClear(H1);
+      BinomialHeapClear(H2);
+
+      return H.head_;
+    }
+
+    BinomialHeap BinomialHeapUnion(BinomialHeap H1, BinomialHeap H2) {
+      // TODO: to implement the method using BinomialHeapMerge and some other subroutines
+    }
+
+    void BinomialHeapClear(BinomialHeap H) {
+      // TODO: to implement a clear of space
+    }
+
     int size() const {
       return size_;
     }
