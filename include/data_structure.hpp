@@ -1,5 +1,7 @@
 #pragma once
 
+#include "private/node.hpp"
+
 // Заголовочный файл с объявлением структуры данных
 
 namespace itis {
@@ -10,7 +12,7 @@ namespace itis {
   inline constexpr auto kStringConstant = "Hello, stranger!";
 
   // Пример: объявление структуры с полями и методами
-  struct MyStructure {
+  struct BinomialHeap {
    public:
     int size_{0};
     int capacity_{0};

@@ -10,7 +10,7 @@ namespace itis {
     Node *child {nullptr};
     Node *sibling {nullptr};
 
-    Node(int key_) : key{k} {}
+    Node(int k) : key{k} {}
   };
 
 }
