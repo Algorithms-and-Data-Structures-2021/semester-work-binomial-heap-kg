@@ -24,9 +24,14 @@ namespace itis {
 
     explicit BinomialHeap(int capacity) : capacity_{capacity} {};
 
-    Node *BinomialHeapMinimum(){     // Compare to 0(lg n)
+    /** The running time is O(lg n).
+     *
+     * @param H is a binomial heap that consists nodes y and z
+     * @return a pointer to the node with the minimum key in a binomial heap H
+     */
+    Node *BinomialHeapMinimum(BinomialHeap H){
       Node *y = nullptr;
-      Node *x = head_;
+      Node *x = H.head_;
       int min = 0;
       min = std::numeric_limits<int>::max();
       while (x != nullptr){
