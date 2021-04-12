@@ -44,6 +44,21 @@ namespace itis {
       return y;
     }
 
+    /**
+     * Makes z the parent of y.
+     * Thus, the kye of z must be lower than the key of y.
+     * The running time is O(1).
+     *
+     * @param y is a node with greater key
+     * @param z is a node with lower key
+     */
+    void BinomialLink(Node *y, Node *z) {
+      y->p = z;
+      y->sibling = z->child;
+      z->child = y;
+      z->degree++;
+    }
+
     int size() const {
       return size_;
     }
