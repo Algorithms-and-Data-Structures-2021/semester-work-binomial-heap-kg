@@ -15,14 +15,13 @@ namespace itis {
   struct BinomialHeap {
    public:
     int size_{0};
-    int capacity_;
     int* data_{nullptr};
     Node *head_{nullptr};
 
     // Tip 2: На начальном этапе разработки структуры данных можете определения методов задавать в
     // заголовочном файле, как только работа будет завершена, можно будет оставить здесь только объявления.
 
-    explicit BinomialHeap(int capacity) : capacity_{capacity} {};
+    explicit BinomialHeap() = default;
 
     /** The running time is O(lg n).
      *
