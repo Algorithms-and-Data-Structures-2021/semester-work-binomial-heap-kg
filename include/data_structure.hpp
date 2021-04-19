@@ -36,6 +36,19 @@ namespace itis {
 
     // Tip 2: На начальном этапе разработки структуры данных можете определения методов задавать в
     // заголовочном файле, как только работа будет завершена, можно будет оставить здесь только объявления.
+  Node *mergeBinomialTrees(Node *b1, Node *b2) {
+    if (b1->data > b2->data){
+      Node *temp = b1;
+      b1 = b2;
+      b2 = temp;
+    }
+    b2->parent = b1;
+    b2->sibling = b1->child;
+    b1->child = b2;
+    b1->degree++;
+
+    return b1;
+  }
 
     int size() const {
       return size_;
