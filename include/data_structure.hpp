@@ -1,4 +1,5 @@
 #pragma once
+#include <algorithm>
 
 // Заголовочный файл с объявлением структуры данных
 
@@ -32,6 +33,7 @@ namespace itis {
    public:
     int size_{0};
     int capacity_{0};
+    Node *root_list{nullptr};
     // int* data_{nullptr};
 
     // Tip 2: На начальном этапе разработки структуры данных можете определения методов задавать в
@@ -49,6 +51,8 @@ namespace itis {
 
       return b1;
     }
+
+    MyStructure* unionBinomialHeap(MyStructure *l1, MyStructure *l2) {}
 
     int size() const {
       return size_;
