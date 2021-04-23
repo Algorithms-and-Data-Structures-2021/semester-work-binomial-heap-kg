@@ -1,5 +1,6 @@
 #pragma once
 #include <list>
+#include <algorithm>
 
 // Заголовочный файл с объявлением структуры данных
 
@@ -19,8 +20,23 @@ namespace itis {
   struct MyStructure {
    public:
     int size_{0};
-    int capacity_{0};
+//    int capacity_{0};
     int* data_{nullptr};
+    std::list<Node*> root_list;
+
+    Node* mergeBinomialTrees(Node *n1, Node *n2){
+      if (n1->data > n2->data){
+        std::swap(n1, n2);
+      }
+      n2->parent = n1;
+      n2->sibling = n1->child;
+      n1->child = n2;
+      n1->degree++;
+
+      return n1;
+    }
+
+
 
     // Tip 2: На начальном этапе разработки структуры данных можете определения методов задавать в
     // заголовочном файле, как только работа будет завершена, можно будет оставить здесь только объявления.
