@@ -44,7 +44,30 @@ namespace itis {
       return n1;
     }
 
-
+    std::list<Node*> unionBionomialHaap(std::list<Node*> l1, std::list<Node*> l2){
+      std::list<Node*> _new;
+      std::list<Node*>::iterator it = l1.begin();
+      std::list<Node*>::iterator ot = l2.begin();
+      while(it != l1.end() && ot != l2.end()){
+        if((*it)->degree <= (*ot)->degree){
+          _new.push_back(*it);
+          it++;
+        }
+        else{
+          _new.push_back(*ot);
+          ot++;
+        }
+      }
+      while(it != l1.end()){
+        _new.push_back(*it);
+        it++;
+      }
+      while(ot != l2.end()){
+        _new.push_back(*ot);
+        ot++;
+      }
+      return _new;
+    }
 
     // Tip 2: На начальном этапе разработки структуры данных можете определения методов задавать в
     // заголовочном файле, как только работа будет завершена, можно будет оставить здесь только объявления.
