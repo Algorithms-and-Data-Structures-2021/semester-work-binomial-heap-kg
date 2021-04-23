@@ -1,6 +1,7 @@
 #pragma once
 #include <list>
 #include <algorithm>
+#include <iostream>
 // Заголовочный файл с объявлением структуры данных
 
 namespace itis {
@@ -111,6 +112,22 @@ namespace itis {
       return temp;
     }
 
+    void printTree(Node *h) {
+      while (h) {
+        std::cout << h->data << " ";
+        printTree(h->child);
+        h = h->sibling;
+      }
+    }
+
+    void printHeap(std::list<Node*> _heap) {
+      std::list<Node*>::iterator  it;
+      it = _heap.begin();
+      while (it != _heap.begin()) {
+        printTree(*it);
+        it++;
+      }
+    }
     // Tip 2: На начальном этапе разработки структуры данных можете определения методов задавать в
     // заголовочном файле, как только работа будет завершена, можно будет оставить здесь только объявления.
 
