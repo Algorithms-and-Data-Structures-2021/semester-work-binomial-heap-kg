@@ -100,6 +100,17 @@ namespace itis {
       return heap;
     }
 
+    Node* detMin(std::list<Node*> _heap) {
+      std::list<Node*>::iterator it = _heap.begin();
+      Node *temp = *it;
+      while (it != _heap.end()) {
+        if ((*it)->data < temp->data)
+          temp = *it;
+        it++;
+      }
+      return temp;
+    }
+
     // Tip 2: На начальном этапе разработки структуры данных можете определения методов задавать в
     // заголовочном файле, как только работа будет завершена, можно будет оставить здесь только объявления.
 
