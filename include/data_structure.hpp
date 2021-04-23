@@ -43,6 +43,48 @@ namespace itis {
       return b1;
     }
 
+    std::list<Node*> adjust(std::list<Node*> _heap) {
+      if (_heap.size() <= 1)
+        return _heap;
+      std::list<Node*> new_heap;
+      std::list<Node*>::iterator it1, it2, it3;
+      it1 = it2 = it3 = _heap.begin();
+
+      if (_heap.size() == 2) {
+        it2 = it2;
+        it2++;
+        it3 = _heap.end();
+      } else {
+        it2++;
+        it3 = it2;
+        it3++;
+      }
+      while (it1 != _heap.end()) {
+        if (it2 == _heap.end())
+          it1++;
+        else if ((*it1)->degree < (*it2)->degree) {
+          it1++;
+          it2++;
+          if (it3 != _heap.end())
+            it3++;
+        }
+        else if (it3 != _heap.end() &&
+            (*it1)->degree == (*it2)->degree &&
+            (*it1)->degree == (*it3)->degree) {
+          it1++;
+          it2++;
+          it3++;
+        }
+        else if ((*it1)->degree == (*it2)->degree) {
+          Node *temp;  // can it be deleted?
+          *it1 = mergeBinomialTrees(*it1, *it2);
+          it2 = _heap.erase(it2);
+          if (it3 != _heap.end())
+            it3++;
+        }
+      }
+      return _heap;
+    }
 
     // Tip 2: На начальном этапе разработки структуры данных можете определения методов задавать в
     // заголовочном файле, как только работа будет завершена, можно будет оставить здесь только объявления.
