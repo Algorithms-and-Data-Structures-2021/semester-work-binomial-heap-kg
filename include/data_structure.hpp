@@ -1,7 +1,7 @@
 #pragma once
 #include <list>
 #include <algorithm>
-
+#include <iostream>
 // Заголовочный файл с объявлением структуры данных
 
 namespace itis {
@@ -32,17 +32,14 @@ namespace itis {
     int* data_{nullptr};
     std::list<Node*> root_list;
 
-    Node* mergeBinomialTrees(Node *n1, Node *n2){
-      if (n1->data > n2->data){
-        std::swap(n1, n2);
-      }
-      n2->parent = n1;
-      n2->sibling = n1->child;
-      n1->child = n2;
-      n1->degree++;
+    Node* mergeBinomialTrees(Node *b1, Node *b2) {
+      if (b1->data > b2->data)
+        std::swap(b1, b2);
 
-      return n1;
-    }
+      b2->parent = b1;
+      b2->sibling = b1->child;
+      b1->child = b2;
+      b1->degree++;
 
     std::list<Node*> unionBionomialHaap(std::list<Node*> l1, std::list<Node*> l2){
       std::list<Node*> _new;
@@ -69,6 +66,48 @@ namespace itis {
       return _new;
     }
 
+    std::list<Node*> adjust(std::list<Node*> _heap) {
+      if (_heap.size() <= 1)
+        return _heap;
+      std::list<Node*> new_heap;
+      std::list<Node*>::iterator it1, it2, it3;
+      it1 = it2 = it3 = _heap.begin();
+
+      if (_heap.size() == 2) {
+        it2 = it2;
+        it2++;
+        it3 = _heap.end();
+      } else {
+        it2++;
+        it3 = it2;
+        it3++;
+      }
+      while (it1 != _heap.end()) {
+        if (it2 == _heap.end())
+          it1++;
+        else if ((*it1)->degree < (*it2)->degree) {
+          it1++;
+          it2++;
+          if (it3 != _heap.end())
+            it3++;
+        }
+        else if (it3 != _heap.end() &&
+            (*it1)->degree == (*it2)->degree &&
+            (*it1)->degree == (*it3)->degree) {
+          it1++;
+          it2++;
+          it3++;
+        }
+        else if ((*it1)->degree == (*it2)->degree) {
+          Node *temp;  // can it be deleted?
+          *it1 = mergeBinomialTrees(*it1, *it2);
+          it2 = _heap.erase(it2);
+          if (it3 != _heap.end())
+            it3++;
+        }
+      }
+      return _heap;
+    }
     std::list<Node*> insertATreeInHeap(std::list<Node*> _heap, Node *tree){
       std::list<Node*> temp;
       temp.push_back(tree);
@@ -100,6 +139,47 @@ namespace itis {
       return new_heap;
     }
 
+    std::list<Node*> removeMinFromTreeReturnBHeap(Node *tree) {
+      std::list<Node*> heap;
+      Node *temp = tree->child;
+      Node *lo;
+
+      while (temp) {
+        lo = temp;
+        temp = temp->sibling;
+        lo->sibling = nullptr;
+        heap.push_front(lo);
+      }
+      return heap;
+    }
+
+    Node* detMin(std::list<Node*> _heap) {
+      std::list<Node*>::iterator it = _heap.begin();
+      Node *temp = *it;
+      while (it != _heap.end()) {
+        if ((*it)->data < temp->data)
+          temp = *it;
+        it++;
+      }
+      return temp;
+    }
+
+    void printTree(Node *h) {
+      while (h) {
+        std::cout << h->data << " ";
+        printTree(h->child);
+        h = h->sibling;
+      }
+    }
+
+    void printHeap(std::list<Node*> _heap) {
+      std::list<Node*>::iterator  it;
+      it = _heap.begin();
+      while (it != _heap.begin()) {
+        printTree(*it);
+        it++;
+      }
+    }
     // Tip 2: На начальном этапе разработки структуры данных можете определения методов задавать в
     // заголовочном файле, как только работа будет завершена, можно будет оставить здесь только объявления.
 
