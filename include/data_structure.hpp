@@ -86,6 +86,20 @@ namespace itis {
       return _heap;
     }
 
+    std::list<Node*> removeMinFromTreeReturnBHeap(Node *tree) {
+      std::list<Node*> heap;
+      Node *temp = tree->child;
+      Node *lo;
+
+      while (temp) {
+        lo = temp;
+        temp = temp->sibling;
+        lo->sibling = nullptr;
+        heap.push_front(lo);
+      }
+      return heap;
+    }
+
     // Tip 2: На начальном этапе разработки структуры данных можете определения методов задавать в
     // заголовочном файле, как только работа будет завершена, можно будет оставить здесь только объявления.
 
