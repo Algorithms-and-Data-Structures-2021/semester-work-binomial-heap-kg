@@ -15,7 +15,7 @@ namespace itis {
     int data, degree;
     Node *child, *sibling, *parent;
 
-    Node *newNode(int key) {
+    static Node *newNode(int key) {
       Node *temp = new Node;
       temp->data = key;
       temp->degree = 0;
@@ -41,7 +41,10 @@ namespace itis {
       b1->child = b2;
       b1->degree++;
 
-    std::list<Node*> unionBionomialHaap(std::list<Node*> l1, std::list<Node*> l2){
+      return b1;
+    }
+
+    std::list<Node*> unionBinomialHeap(std::list<Node*> l1, std::list<Node*> l2){
       std::list<Node*> _new;
       std::list<Node*>::iterator i1 = l1.begin();
       std::list<Node*>::iterator i2 = l2.begin();
@@ -108,15 +111,16 @@ namespace itis {
       }
       return _heap;
     }
+
     std::list<Node*> insertATreeInHeap(std::list<Node*> _heap, Node *tree){
       std::list<Node*> temp;
       temp.push_back(tree);
-      temp = unionBionomialHaap(_heap, temp);
+      temp = unionBinomialHeap(_heap, temp);
       return adjust(temp);
     }
 
     std::list<Node*> insert(std::list<Node*> _heap, int key){
-      Node *temp = newNode(key);
+      Node *temp = Node::newNode(key);
       return insertATreeInHeap(_heap, temp);
     }
 
@@ -134,7 +138,7 @@ namespace itis {
         i++;
       }
       lo = removeMinFromTreeReturnBHeap(temp);
-      new_heap = unionBionomialHaap(new_heap, lo);
+      new_heap = unionBinomialHeap(new_heap, lo);
       new_heap = adjust(new_heap);
       return new_heap;
     }
@@ -153,7 +157,7 @@ namespace itis {
       return heap;
     }
 
-    Node* detMin(std::list<Node*> _heap) {
+    Node* getMin(std::list<Node*> _heap) {
       std::list<Node*>::iterator it = _heap.begin();
       Node *temp = *it;
       while (it != _heap.end()) {
@@ -182,10 +186,6 @@ namespace itis {
     }
     // Tip 2: На начальном этапе разработки структуры данных можете определения методов задавать в
     // заголовочном файле, как только работа будет завершена, можно будет оставить здесь только объявления.
-
-    int size() const {
-      return size_;
-    }
   };
 
 }  // namespace itis
