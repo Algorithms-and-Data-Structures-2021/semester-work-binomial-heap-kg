@@ -26,6 +26,10 @@ namespace itis {
     int* data_{nullptr};
     std::list<Node*> root_list;
 
+//    static std::list<Node*> make(){
+//      std::list<Node*> root_list{nullptr};
+//    }
+
     Node* mergeBinomialTrees(Node *b1, Node *b2);
 
     std::list<Node*> unionBinomialHeap(std::list<Node*> l1, std::list<Node*> l2);
