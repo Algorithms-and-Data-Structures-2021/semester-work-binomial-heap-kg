@@ -49,6 +49,12 @@ namespace itis {
       _new->root_list.push_back(*i2);
       i2++;
     }
+//    std::list<Node*>::iterator  it;
+//    it = _new->root_list.begin();
+//    while (it != _new->root_list.end()) {
+//      printTree(*it);
+//      it++;}
+//    return _new;
     return _new;
   }
 
@@ -97,10 +103,19 @@ namespace itis {
 
   BinomialHeap *BinomialHeap::insertATreeInHeap(BinomialHeap* _heap, Node *tree) {
 //    std::list<Node*> temp;
-    BinomialHeap *temp = new BinomialHeap();
-    temp->root_list.push_back(tree);
-    temp = unionBinomialHeap(_heap, temp);
-    return adjust(temp);
+//    BinomialHeap *temp = new BinomialHeap();
+    _heap->root_list.push_back(tree);
+//    temp = unionBinomialHeap(_heap, temp);
+
+//    temp = adjust(temp);
+//    std::list<Node*>::iterator  it;
+//    it = _heap->root_list.begin();
+//    while (it != _heap->root_list.end()) {
+//      printTree(*it);
+//      it++;}
+//    std::cout << std::endl;
+    return _heap;
+//    return adjust(temp);
   }
 
   BinomialHeap *BinomialHeap::insert(BinomialHeap* _heap, int key) {
@@ -170,6 +185,7 @@ namespace itis {
       printTree(*it);
       it++;
     }
+    std::cout << std::endl;
   }
 }  // namespace itis
 

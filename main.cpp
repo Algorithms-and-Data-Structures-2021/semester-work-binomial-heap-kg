@@ -16,6 +16,7 @@ int main(int argc, char *argv[]) {
   // auto _heap = itis::BinomialHeap();
   main_heap.insert(&main_heap, 1);
   main_heap.insert(&main_heap, 2);
+  main_heap.printHeap(&main_heap);
   main_heap.insert(&main_heap, 3);
 
 //  _heap.root_list = _heap.insert(_heap.root_list, 1);
@@ -24,7 +25,7 @@ int main(int argc, char *argv[]) {
 //  std::cout << "heap" << std::endl;
 //  _heap.printHeap(_heap.root_list);
 
-  main_heap.printHeap(&main_heap);
+    main_heap.printHeap(&main_heap);
 
 //  itis::Node *temp = _heap.getMin(_heap.root_list);
 //  std::cout << temp->data << std::endl;
