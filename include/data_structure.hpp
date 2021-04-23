@@ -32,23 +32,23 @@ namespace itis {
 
     Node* mergeBinomialTrees(Node *b1, Node *b2);
 
-    std::list<Node*> unionBinomialHeap(std::list<Node*> l1, std::list<Node*> l2);
+    BinomialHeap *unionBinomialHeap(BinomialHeap *l1, BinomialHeap *l2);
 
-    std::list<Node*> adjust(std::list<Node*> _heap);
+    BinomialHeap *adjust(BinomialHeap *_heap);
 
-    std::list<Node*> insertATreeInHeap(std::list<Node*> _heap, Node *tree);
+    BinomialHeap *insertATreeInHeap(BinomialHeap *_heap, Node *tree);
 
-    std::list<Node*> insert(std::list<Node*> _heap, int key);
+    BinomialHeap *insert(BinomialHeap *_heap, int key);
 
-    Node* getMin(std::list<Node*> _heap);
+    Node* getMin(BinomialHeap *_heap);
 
-    std::list<Node*> extractMin(std::list<Node*> _heap);
+    BinomialHeap *extractMin(BinomialHeap *_heap);
 
-    std::list<Node*> removeMinFromTreeReturnBHeap(Node *tree);
+    BinomialHeap *removeMinFromTreeReturnBHeap(Node *tree);
 
     void printTree(Node *h);
 
-    void printHeap(std::list<Node*> _heap);
+    void printHeap(BinomialHeap *_heap);
     // Tip 2: На начальном этапе разработки структуры данных можете определения методов задавать в
     // заголовочном файле, как только работа будет завершена, можно будет оставить здесь только объявления.
 
