@@ -46,30 +46,30 @@ namespace itis {
 
     std::list<Node*> unionBionomialHaap(std::list<Node*> l1, std::list<Node*> l2){
       std::list<Node*> _new;
-      std::list<Node*>::iterator it = l1.begin();
-      std::list<Node*>::iterator ot = l2.begin();
-      while(it != l1.end() && ot != l2.end()){
-        if((*it)->degree <= (*ot)->degree){
-          _new.push_back(*it);
-          it++;
+      std::list<Node*>::iterator i1 = l1.begin();
+      std::list<Node*>::iterator i2 = l2.begin();
+      while(i1 != l1.end() && i2 != l2.end()){
+        if((*i1)->degree <= (*i2)->degree){
+          _new.push_back(*i1);
+          i1++;
         }
         else{
-          _new.push_back(*ot);
-          ot++;
+          _new.push_back(*i2);
+          i2++;
         }
       }
-      while(it != l1.end()){
-        _new.push_back(*it);
-        it++;
+      while(i1 != l1.end()){
+        _new.push_back(*i1);
+        i1++;
       }
-      while(ot != l2.end()){
-        _new.push_back(*ot);
-        ot++;
+      while(i2 != l2.end()){
+        _new.push_back(*i2);
+        i2++;
       }
       return _new;
     }
 
-    std::list<Node*> insertTreeInHeap(std::list<Node*> _heap, Node *tree){
+    std::list<Node*> insertATreeInHeap(std::list<Node*> _heap, Node *tree){
       std::list<Node*> temp;
       temp.push_back(tree);
       temp = unionBionomialHaap(_heap, temp);
@@ -78,7 +78,26 @@ namespace itis {
 
     std::list<Node*> insert(std::list<Node*> _heap, int key){
       Node *temp = newNode(key);
-      return insertTreeInHeap(_heap, temp);
+      return insertATreeInHeap(_heap, temp);
+    }
+
+    std::list<Node*> extractMin(std::list<Node*> _heap){
+      std::list<Node*> new_heap, lo;
+      Node *temp;
+
+      temp = getMin(_heap);
+      std::list<Node*>::iterator i;
+      i = _heap.begin();
+      while (i != _heap.end()){
+        if(*i != temp){
+          new_heap.push_back(*i);
+        }
+        i++;
+      }
+      lo = removeMinFromTreeReturnBHeap(temp);
+      new_heap = unionBionomialHaap(new_heap, lo);
+      new_heap = adjust(new_heap);
+      return new_heap;
     }
 
     // Tip 2: На начальном этапе разработки структуры данных можете определения методов задавать в
