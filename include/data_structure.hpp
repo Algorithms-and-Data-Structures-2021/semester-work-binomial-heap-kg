@@ -27,8 +27,10 @@ namespace itis {
   struct MyStructure {
    public:
     int size_{0};
-    int capacity_{0};
-    int* data_{nullptr};
+//    int capacity_{0};
+//    int* data_{nullptr};
+    std::list<Node *> root_list;
+
 
     // Tip 2: На начальном этапе разработки структуры данных можете определения методов задавать в
     // заголовочном файле, как только работа будет завершена, можно будет оставить здесь только объявления.
