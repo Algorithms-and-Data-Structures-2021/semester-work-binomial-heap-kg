@@ -1,6 +1,6 @@
 #pragma once
 #include <list>
-
+#include <algorithm>
 // Заголовочный файл с объявлением структуры данных
 
 namespace itis {
@@ -30,6 +30,18 @@ namespace itis {
 //    int capacity_{0};
 //    int* data_{nullptr};
     std::list<Node *> root_list;
+
+    Node* mergeBinomialTrees(Node *b1, Node *b2) {
+      if (b1->data > b2->data)
+        std::swap(b1, b2);
+
+      b2->parent = b1;
+      b2->sibling = b1->child;
+      b1->child = b2;
+      b1->degree++;
+
+      return b1;
+    }
 
 
     // Tip 2: На начальном этапе разработки структуры данных можете определения методов задавать в
