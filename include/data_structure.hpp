@@ -14,6 +14,14 @@ namespace itis {
   struct Node {
     int data, degree;
     Node *child, *sibling, *parent;
+
+    Node *newNode(int key) {
+      Node *temp = new Node;
+      temp->data = key;
+      temp->degree = 0;
+      temp->child = temp->parent = temp->sibling = nullptr;
+      return temp;
+    }
   };
 
   // Пример: объявление структуры с полями и методами
