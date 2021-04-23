@@ -15,7 +15,7 @@ namespace itis {
     int data, degree;
     Node *child, *sibling, *parent;
 
-    Node *newNode(int key) {
+    static Node *newNode(int key) {
       Node *temp = new Node;
       temp->data = key;
       temp->degree = 0;
@@ -33,15 +33,18 @@ namespace itis {
     std::list<Node*> root_list;
 
     Node* mergeBinomialTrees(Node *b1, Node *b2) {
-      if (b1->data > b2->data)
+      if (b1->data > b2->data) {
         std::swap(b1, b2);
 
-      b2->parent = b1;
-      b2->sibling = b1->child;
-      b1->child = b2;
-      b1->degree++;
+        b2->parent = b1;
+        b2->sibling = b1->child;
+        b1->child = b2;
+        b1->degree++;
+      }
+      return b1;
+    }
 
-    std::list<Node*> unionBionomialHaap(std::list<Node*> l1, std::list<Node*> l2){
+    std::list<Node*> unionBinomialHeap(std::list<Node*> l1, std::list<Node*> l2){
       std::list<Node*> _new;
       std::list<Node*>::iterator i1 = l1.begin();
       std::list<Node*>::iterator i2 = l2.begin();
@@ -99,7 +102,7 @@ namespace itis {
           it3++;
         }
         else if ((*it1)->degree == (*it2)->degree) {
-          Node *temp;  // can it be deleted?
+//          Node *temp;  // can it be deleted?
           *it1 = mergeBinomialTrees(*it1, *it2);
           it2 = _heap.erase(it2);
           if (it3 != _heap.end())
@@ -111,13 +114,24 @@ namespace itis {
     std::list<Node*> insertATreeInHeap(std::list<Node*> _heap, Node *tree){
       std::list<Node*> temp;
       temp.push_back(tree);
-      temp = unionBionomialHaap(_heap, temp);
+      temp = unionBinomialHeap(_heap, temp);
       return adjust(temp);
     }
 
     std::list<Node*> insert(std::list<Node*> _heap, int key){
-      Node *temp = newNode(key);
+      Node *temp = Node::newNode(key);
       return insertATreeInHeap(_heap, temp);
+    }
+
+    Node* getMin(std::list<Node*> _heap) {
+      std::list<Node*>::iterator it = _heap.begin();
+      Node *temp = *it;
+      while (it != _heap.end()) {
+        if ((*it)->data < temp->data)
+          temp = *it;
+        it++;
+      }
+      return temp;
     }
 
     std::list<Node*> extractMin(std::list<Node*> _heap){
@@ -134,7 +148,7 @@ namespace itis {
         i++;
       }
       lo = removeMinFromTreeReturnBHeap(temp);
-      new_heap = unionBionomialHaap(new_heap, lo);
+      new_heap = unionBinomialHeap(new_heap, lo);
       new_heap = adjust(new_heap);
       return new_heap;
     }
@@ -151,17 +165,6 @@ namespace itis {
         heap.push_front(lo);
       }
       return heap;
-    }
-
-    Node* detMin(std::list<Node*> _heap) {
-      std::list<Node*>::iterator it = _heap.begin();
-      Node *temp = *it;
-      while (it != _heap.end()) {
-        if ((*it)->data < temp->data)
-          temp = *it;
-        it++;
-      }
-      return temp;
     }
 
     void printTree(Node *h) {
