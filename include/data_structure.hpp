@@ -69,6 +69,18 @@ namespace itis {
       return _new;
     }
 
+    std::list<Node*> insertTreeInHeap(std::list<Node*> _heap, Node *tree){
+      std::list<Node*> temp;
+      temp.push_back(tree);
+      temp = unionBionomialHaap(_heap, temp);
+      return adjust(temp);
+    }
+
+    std::list<Node*> insert(std::list<Node*> _heap, int key){
+      Node *temp = newNode(key);
+      return insertTreeInHeap(_heap, temp);
+    }
+
     // Tip 2: На начальном этапе разработки структуры данных можете определения методов задавать в
     // заголовочном файле, как только работа будет завершена, можно будет оставить здесь только объявления.
 
