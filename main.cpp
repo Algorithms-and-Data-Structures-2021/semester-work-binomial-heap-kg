@@ -14,7 +14,6 @@ int main(int argc, char *argv[]) {
   main_heap = main_heap->insert(main_heap, 6);
   main_heap = main_heap->insert(main_heap, 1);
   main_heap = main_heap->insert(main_heap, 4);
-  main_heap->printHeap(main_heap);
   main_heap = main_heap->insert(main_heap, 5);
   main_heap = main_heap->insert(main_heap, 8);
   main_heap = main_heap->insert(main_heap, 2);
@@ -23,7 +22,6 @@ int main(int argc, char *argv[]) {
   main_heap = main_heap->insert(main_heap, 9);
 
   main_heap->printHeap(main_heap);
-
 
   return 0;
 }
