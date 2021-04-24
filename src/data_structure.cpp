@@ -19,12 +19,12 @@ namespace itis {
   Node *BinomialHeap::mergeBinomialTrees(Node *b1, Node *b2) {
     if (b1->data > b2->data) {
       std::swap(b1, b2);
-
-      b2->parent = b1;
-      b2->sibling = b1->child;
-      b1->child = b2;
-      b1->degree++;
     }
+
+    b2->parent = b1;
+    b2->sibling = b1->child;
+    b1->child = b2;
+    b1->degree++;
     return b1;
   }
 
@@ -43,8 +43,9 @@ namespace itis {
         i2++;
       }
     }
-    while(i1 != l1->root_list.end()){
-      std::cout << "          im here      " << std::endl;
+    while(i1 != l1->root_list.end())
+    {
+//      std::cout << "          im here      " << std::endl;
       _new->root_list.push_back(*i1);
       i1++;
     }
@@ -69,7 +70,7 @@ namespace itis {
     it1 = it2 = it3 = _heap->root_list.begin();
 
     if (_heap->root_list.size() == 2) {
-      it2 = it2;
+      it2 = it1;
       it2++;
       it3 = _heap->root_list.end();
     } else {
@@ -106,8 +107,10 @@ namespace itis {
 
   BinomialHeap *BinomialHeap::insertATreeInHeap(BinomialHeap* _heap, Node *tree) {
 //    std::list<Node*> temp;
+
     BinomialHeap *temp = new BinomialHeap();
     temp->root_list.push_back(tree);
+
 //    _heap->root_list.push_back(tree);
 //    temp = unionBinomialHeap(_heap, temp);
     BinomialHeap *united_heap = unionBinomialHeap(_heap, temp);
@@ -176,7 +179,7 @@ namespace itis {
 
   void BinomialHeap::printTree(Node *h) {
     while (h) {
-      std::cout << h->data << " " << "degree " << h->degree << "    ";
+      std::cout << h->data << " " << "degree-" << h->degree << " ";
       printTree(h->child);
       h = h->sibling;
     }
