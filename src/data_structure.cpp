@@ -154,9 +154,7 @@ namespace itis {
 
   BinomialHeap *BinomialHeap::removeHeap(BinomialHeap *heap) {
     while (!heap->root_list.empty()) {
-      Node *cur_min = heap->getMin(heap);
-      heap = heap->removeMinFromTreeReturnBHeap(cur_min);
-      delete cur_min;
+      heap = heap->extractMin(heap);
     }
     return nullptr;
   }
