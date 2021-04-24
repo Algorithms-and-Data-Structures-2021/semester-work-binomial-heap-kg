@@ -23,5 +23,10 @@ int main(int argc, char *argv[]) {
 
   main_heap->printHeap(main_heap);
 
+  itis::BinomialHeap *removed_heap = main_heap->removeHeap(main_heap);
+  if (removed_heap == nullptr) {
+    std::cout << "i am null";
+  }
+
   return 0;
 }

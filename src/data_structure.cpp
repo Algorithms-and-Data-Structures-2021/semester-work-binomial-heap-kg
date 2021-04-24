@@ -152,6 +152,15 @@ namespace itis {
     return heap;
   }
 
+  BinomialHeap *BinomialHeap::removeHeap(BinomialHeap *heap) {
+    while (!heap->root_list.empty()) {
+      Node *cur_min = heap->getMin(heap);
+      heap = heap->removeMinFromTreeReturnBHeap(cur_min);
+      delete cur_min;
+    }
+    return nullptr;
+  }
+
   void BinomialHeap::printTree(Node *h) {
     while (h) {
       std::cout << "| " << h->data << " " << "degree: " << h->degree << " |    ";
