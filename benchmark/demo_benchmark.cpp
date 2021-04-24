@@ -4,6 +4,7 @@
 #include <string_view>  // string_view
 #include <chrono>       // high_resolution_clock, duration_cast, nanoseconds
 #include <sstream>      // stringstream
+#include <vector>
 
 // подключаем вашу структуру данных
 #include "data_structure.hpp"
@@ -44,6 +45,19 @@ int main(int argc, char **argv) {
 
   if (input_file) {
     // чтение и обработка набора данных ...
+    vector<string> data;
+    std::string line;
+    int i = 0;
+    while (std::getline(input_file, line)){
+      std::istringstream s(line);
+      std::string field;
+      while (std::getline(s, field, ',')){
+        data.push_back(field);
+//        cout << field << endl;
+        cout << data[i] << endl;
+        i++;
+      }
+    }
   }
 
   // Контрольный тест: операции добавления, удаления, поиска и пр. над структурой данных
