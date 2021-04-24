@@ -37,7 +37,7 @@ itis::BinomialHeap* makeHeap(string path){
       }
     }
   }
-  heap->printHeap(heap);
+//  heap->printHeap(heap);
   return heap;
 }
 
@@ -76,15 +76,37 @@ int main(int argc, char **argv) {
   output_file << "file" << "," << "count" << "," << "number" << "," << "insert" << "," << "get_min" << "," << "extract_min" << endl;
   for(int i =0; i < 8; i++){
     for(int j = 0; j < 10; j++){
-      auto part_file = string(mas3.at(j) + mas2.at(i));
+      auto path_file = string(mas3.at(j) + "/" + mas2.at(i));
+//      cout << path_file << endl;
+//      auto heap = makeHeap(path + path_file);
       for(int k = 0; k < 10; k++){
 //        auto input_file = ifstream(path + part_file);
-        output_file << mas3.at(j) << "," << mas2.at(i) << "," << mas.at(k) << endl;
+
+        const auto time_point_before = chrono::steady_clock::now();
+        auto heap = makeHeap(path + path_file);
+        const auto time_point_after = chrono::steady_clock::now();
+        const auto time_diff = time_point_after - time_point_before;
+        const long time_elapsed_ns = chrono::duration_cast<chrono::nanoseconds>(time_diff).count();
+//        cout << time_elapsed_ns << endl;
+
+        const auto time_point_before2 = chrono::steady_clock::now();
+        heap->getMin(heap);
+        const auto time_point_after2 = chrono::steady_clock::now();
+        const auto time_diff2 = time_point_after2 - time_point_before2;
+        const long time_elapsed_ns2 = chrono::duration_cast<chrono::nanoseconds>(time_diff2).count();
+
+//        const auto time_point_before3 = chrono::steady_clock::now();
+//        heap->extractMin(heap);
+//        const auto time_point_after3 = chrono::steady_clock::now();
+//        const auto time_diff3 = time_point_after3 - time_point_before3;
+//        const long time_elapsed_ns3 = chrono::duration_cast<chrono::nanoseconds>(time_diff3).count();
+
+        output_file << mas3.at(j) << "," << mas2.at(i) << "," << mas.at(k) << "," << time_elapsed_ns << "," << time_elapsed_ns2 << endl;
       }
     }
   }
 
-  makeHeap(path + "/insert/01/100.csv");
+//  makeHeap(path + "/insert/01/100.csv");
 
 //  auto input_file = ifstream(path + "/insert/01/100.csv");
 //
