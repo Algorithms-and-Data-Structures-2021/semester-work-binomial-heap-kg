@@ -95,13 +95,13 @@ int main(int argc, char **argv) {
         const auto time_diff2 = time_point_after2 - time_point_before2;
         const long time_elapsed_ns2 = chrono::duration_cast<chrono::nanoseconds>(time_diff2).count();
 
-//        const auto time_point_before3 = chrono::steady_clock::now();
-//        heap->extractMin(heap);
-//        const auto time_point_after3 = chrono::steady_clock::now();
-//        const auto time_diff3 = time_point_after3 - time_point_before3;
-//        const long time_elapsed_ns3 = chrono::duration_cast<chrono::nanoseconds>(time_diff3).count();
+        const auto time_point_before3 = chrono::steady_clock::now();
+        heap->removeHeap(heap);
+        const auto time_point_after3 = chrono::steady_clock::now();
+        const auto time_diff3 = time_point_after3 - time_point_before3;
+        const long time_elapsed_ns3 = chrono::duration_cast<chrono::nanoseconds>(time_diff3).count();
 
-        output_file << mas3.at(j) << "," << mas2.at(i) << "," << mas.at(k) << "," << time_elapsed_ns << "," << time_elapsed_ns2 << endl;
+        output_file << mas3.at(j) << "," << mas2.at(i) << "," << mas.at(k) << "," << time_elapsed_ns << "," << time_elapsed_ns2 << "," << time_elapsed_ns3 << endl;
       }
     }
   }
@@ -133,14 +133,14 @@ int main(int argc, char **argv) {
   // Tip 3: время работы программы (или участка кода) можно осуществить
   // как изнутри программы (std::chrono), так и сторонними утилитами
 
-  const auto time_point_before = chrono::high_resolution_clock::now();
+//  const auto time_point_before = chrono::high_resolution_clock::now();
 
   // здесь находится участок кода, время которого необходимо замерить
 
-  const auto time_point_after = chrono::high_resolution_clock::now();
+//  const auto time_point_after = chrono::high_resolution_clock::now();
 
   // переводим время в наносекунды
-  const auto time_diff = time_point_after - time_point_before;
+//  const auto time_diff = time_point_after - time_point_before;
 //  const long time_elapsed_ns = chrono::duration_cast<chrono::nanoseconds>(time_diff).count();
 
 //  cout << "Time elapsed (ns): " << time_elapsed_ns << '\n';
