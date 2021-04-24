@@ -10,7 +10,9 @@ namespace itis {
     Node *temp = new Node;
     temp->data = key;
     temp->degree = 0;
-    temp->child = temp->parent = temp->sibling = nullptr;
+    temp->child = nullptr;
+    temp->parent = nullptr;
+    temp->sibling = nullptr;
     return temp;
   }
 
@@ -42,6 +44,7 @@ namespace itis {
       }
     }
     while(i1 != l1->root_list.end()){
+      std::cout << "          im here      " << std::endl;
       _new->root_list.push_back(*i1);
       i1++;
     }
@@ -103,10 +106,11 @@ namespace itis {
 
   BinomialHeap *BinomialHeap::insertATreeInHeap(BinomialHeap* _heap, Node *tree) {
 //    std::list<Node*> temp;
-//    BinomialHeap *temp = new BinomialHeap();
-    _heap->root_list.push_back(tree);
+    BinomialHeap *temp = new BinomialHeap();
+    temp->root_list.push_back(tree);
+//    _heap->root_list.push_back(tree);
 //    temp = unionBinomialHeap(_heap, temp);
-
+    BinomialHeap *united_heap = unionBinomialHeap(_heap, temp);
 //    temp = adjust(temp);
 //    std::list<Node*>::iterator  it;
 //    it = _heap->root_list.begin();
@@ -114,7 +118,7 @@ namespace itis {
 //      printTree(*it);
 //      it++;}
 //    std::cout << std::endl;
-    return _heap;
+    return adjust(united_heap);
 //    return adjust(temp);
   }
 
@@ -172,7 +176,7 @@ namespace itis {
 
   void BinomialHeap::printTree(Node *h) {
     while (h) {
-      std::cout << h->data << " ";
+      std::cout << h->data << " " << "degree " << h->degree << "    ";
       printTree(h->child);
       h = h->sibling;
     }
