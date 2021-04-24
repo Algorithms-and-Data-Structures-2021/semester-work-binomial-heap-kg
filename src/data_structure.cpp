@@ -135,6 +135,7 @@ namespace itis {
     lo = removeMinFromTreeReturnBHeap(temp);
     new_heap = unionBinomialHeap(new_heap, lo);
     new_heap = adjust(new_heap);
+    delete temp;
     return new_heap;
   }
 
