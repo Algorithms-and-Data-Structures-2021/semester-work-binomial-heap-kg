@@ -46,6 +46,8 @@ namespace itis {
 
     BinomialHeap *removeMinFromTreeReturnBHeap(Node *tree);
 
+    BinomialHeap *removeHeap(BinomialHeap *heap);
+
     void printTree(Node *h);
 
     void printHeap(BinomialHeap *_heap);
