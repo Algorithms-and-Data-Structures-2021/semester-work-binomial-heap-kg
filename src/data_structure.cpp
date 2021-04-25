@@ -50,13 +50,13 @@ namespace itis {
       _new->root_list.push_back(*i2);
       i2++;
     }
+
     return _new;
   }
 
   BinomialHeap *BinomialHeap::adjust(BinomialHeap *_heap) {
     if (_heap->root_list.size() <= 1)
       return _heap;
-    // std::list<Node*> new_heap;
     std::list<Node*>::iterator it1, it2, it3;
     it1 = it2 = it3 = _heap->root_list.begin();
 
@@ -135,7 +135,7 @@ namespace itis {
     lo = removeMinFromTreeReturnBHeap(temp);
     new_heap = unionBinomialHeap(new_heap, lo);
     new_heap = adjust(new_heap);
-    delete temp;
+
     return new_heap;
   }
 
@@ -150,6 +150,8 @@ namespace itis {
       lo->sibling = nullptr;
       heap->root_list.push_front(lo);
     }
+    delete tree;
+    tree = nullptr;
     return heap;
   }
 
@@ -161,7 +163,6 @@ namespace itis {
   }
 
   BinomialHeap *BinomialHeap::makeHeap(BinomialHeap *former_heap, std::vector<int> &input_data) {
-    // BinomialHeap *heap = new BinomialHeap();
     for (int &number: input_data) {
       former_heap = former_heap->insert(former_heap, number);
     }

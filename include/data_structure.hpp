@@ -49,7 +49,7 @@ namespace itis {
 
     BinomialHeap *removeHeap(BinomialHeap *heap);
 
-    BinomialHeap *makeHeap(std::vector<int> &input_data);
+    BinomialHeap *makeHeap(BinomialHeap *former_heap, std::vector<int> &input_data);
 
     void printTree(Node *h);
 
