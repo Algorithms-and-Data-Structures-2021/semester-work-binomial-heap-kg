@@ -160,7 +160,7 @@ namespace itis {
     return heap;
   }
 
-  BinomialHeap *BinomialHeap::makeHeap(std::vector<int> input_data) {
+  BinomialHeap *BinomialHeap::makeHeap(std::vector<int> &input_data) {
     BinomialHeap *heap = new BinomialHeap();
     for (int &number: input_data) {
       heap = heap->insert(heap, number);
