@@ -28,9 +28,15 @@ int main(int argc, char *argv[]) {
 
   vector<int>data_for_heap{6, 1, 4, 5, 8, 2, 4, 3, 9};
   itis::BinomialHeap *main_heap2 = new itis::BinomialHeap();
-  main_heap2 = main_heap2->makeHeap(data_for_heap);
+  main_heap2 = main_heap2->makeHeap(main_heap2, data_for_heap);
   std::cout << "new heap: " << endl;
   main_heap2->printHeap(main_heap2);
+
+  main_heap2 = main_heap2->extractMin(main_heap2);
+  main_heap2 = main_heap2->extractMin(main_heap2);
+  main_heap2 = main_heap2->extractMin(main_heap2);
+  main_heap2->printHeap(main_heap2);
+
 
   return 0;
 }
