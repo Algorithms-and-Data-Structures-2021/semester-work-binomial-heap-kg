@@ -16,29 +16,20 @@ using namespace itis;
 static constexpr auto kDatasetPath = string_view{PROJECT_DATASET_DIR};
 static constexpr auto kProjectPath = string_view{PROJECT_SOURCE_DIR};
 
-itis::BinomialHeap* makeHeap(string path){
+vector<string> makeHeap(string path){
   auto input_file = ifstream(path);
-  auto *heap = new itis::BinomialHeap();
+  vector<string> data;
   if (input_file) {
-//    vector<string> data;
-//    auto *heap = new itis::BinomialHeap();
     std::string line;
-//    int i = 0;
     while (std::getline(input_file, line)){
-  //      cout << line << endl;
       std::istringstream s(line);
       std::string field;
       while (std::getline(s, field, ',')) {
-        heap = heap->insert(heap, stoi(field));
-//        data.push_back(field);
-//        cout << field << endl;
-  //        cout << data[i] << endl;
-//        i++;
+        data.push_back(field);
       }
     }
   }
-//  heap->printHeap(heap);
-  return heap;
+  return data;
 }
 
 int main(int argc, char **argv) {
@@ -71,32 +62,32 @@ int main(int argc, char **argv) {
   cout << "Path to the 'dataset/' folder: " << path << endl;
 
   auto output_file = ofstream(path);
-//  ofstream output_file;
   output_file.open(path + "/" + "result.csv", ios::out | ios::app);
-  output_file << "file" << "," << "count" << "," << "number" << "," << "insert" << "," << "get_min" << "," << "extract_min" << endl;
+  output_file << "file" << "," << "count" << "," << "number" << "," << "insert" << "," << "getMin" << "," << "removeHeap" << endl;
   for(int i =0; i < 8; i++){
     for(int j = 0; j < 10; j++){
       auto path_file = string(mas3.at(j) + "/" + mas2.at(i));
-//      cout << path_file << endl;
-//      auto heap = makeHeap(path + path_file);
       for(int k = 0; k < 10; k++){
-//        auto input_file = ifstream(path + part_file);
+        auto data = makeHeap(path + path_file);
+        itis::BinomialHeap *main_heap = new itis::BinomialHeap();
+        auto size_ = data.size();
 
         const auto time_point_before = chrono::steady_clock::now();
-        auto heap = makeHeap(path + path_file);
+        for(int i = 0; i < size_; i++){
+          main_heap = main_heap->insert(main_heap, i);
+        }
         const auto time_point_after = chrono::steady_clock::now();
         const auto time_diff = time_point_after - time_point_before;
         const long time_elapsed_ns = chrono::duration_cast<chrono::nanoseconds>(time_diff).count();
-//        cout << time_elapsed_ns << endl;
 
         const auto time_point_before2 = chrono::steady_clock::now();
-        heap->getMin(heap);
+        main_heap->getMin(main_heap);
         const auto time_point_after2 = chrono::steady_clock::now();
         const auto time_diff2 = time_point_after2 - time_point_before2;
         const long time_elapsed_ns2 = chrono::duration_cast<chrono::nanoseconds>(time_diff2).count();
 
         const auto time_point_before3 = chrono::steady_clock::now();
-        heap->removeHeap(heap);
+        main_heap->removeHeap(main_heap);
         const auto time_point_after3 = chrono::steady_clock::now();
         const auto time_diff3 = time_point_after3 - time_point_before3;
         const long time_elapsed_ns3 = chrono::duration_cast<chrono::nanoseconds>(time_diff3).count();
@@ -105,28 +96,7 @@ int main(int argc, char **argv) {
       }
     }
   }
-
-//  makeHeap(path + "/insert/01/100.csv");
-
-//  auto input_file = ifstream(path + "/insert/01/100.csv");
-//
-//  if (input_file) {
-//    // чтение и обработка набора данных ...
-//    vector<string> data;
-//    std::string line;
-//    int i = 0;
-//    while (std::getline(input_file, line)){
-////      cout << line << endl;
-//      std::istringstream s(line);
-//      std::string field;
-//      while (std::getline(s, field, ',')) {
-//        data.push_back(field);
-//        cout << field << endl;
-////        cout << data[i] << endl;
-//        i++;
-//      }
-//    }
-//  }
+  output_file.close();
 
   // Контрольный тест: операции добавления, удаления, поиска и пр. над структурой данных
 
