@@ -1,11 +1,9 @@
 #include "data_structure.hpp"
 #include <iostream>
 
-// файл с определениями
 
 namespace itis {
 
-  // здесь должны быть определения методов вашей структуры
   Node *Node::newNode(int key) {
     Node *temp = new Node;
     temp->data = key;
@@ -56,7 +54,6 @@ namespace itis {
   BinomialHeap *BinomialHeap::adjust(BinomialHeap *_heap) {
     if (_heap->root_list.size() <= 1)
       return _heap;
-    // std::list<Node*> new_heap;
     std::list<Node*>::iterator it1, it2, it3;
     it1 = it2 = it3 = _heap->root_list.begin();
 
@@ -185,4 +182,4 @@ namespace itis {
     }
     std::cout << std::endl;
   }
-}  // namespace itis
+}
