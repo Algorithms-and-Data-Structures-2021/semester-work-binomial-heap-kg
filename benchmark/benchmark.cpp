@@ -24,13 +24,20 @@ vector<int> createVectorFromCSV(string &path) {
   string token;
   vector<int> numbers;
 
-  while (getline(ss, token, ','))
+  while (getline(ss, token, ',')) {
     numbers.push_back(stoi(token));
-
+  }
   return numbers;
 }
 
+void demoWrite(string &data, string& path_to_results) {
+  fstream fout;
+  fout.open(path_to_results, ios::out | ios::app);
+  fout << data << "\n";
+}
+
 int main() {
+
   string p = "/insert/01/100.csv";
   const auto path_to_data_folder = string(kDatasetPath);
   string new_path = path_to_data_folder + p;
@@ -43,5 +50,14 @@ int main() {
   }
   cout << vec.size() << " <-- size";
 
+  string path_to_results_main = string(kDatasetPath) + "/results.csv";
+  cout << path_to_results_main << endl;
+  string data_main{"hsjkaj,yua,132,23"};
+
+
+  demoWrite(data_main, path_to_results_main);
+  demoWrite(data_main, path_to_results_main);
+  demoWrite(data_main, path_to_results_main);
+  demoWrite(data_main, path_to_results_main);
   return 0;
 }
