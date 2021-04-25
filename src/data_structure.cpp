@@ -157,7 +157,7 @@ namespace itis {
     while (!heap->root_list.empty()) {
       heap = heap->extractMin(heap);
     }
-    return nullptr;
+    return heap;
   }
 
   void BinomialHeap::printTree(Node *h) {

@@ -22,11 +22,9 @@ int main(int argc, char *argv[]) {
   main_heap = main_heap->insert(main_heap, 9);
 
   main_heap->printHeap(main_heap);
-
-  itis::BinomialHeap *removed_heap = main_heap->removeHeap(main_heap);
-  if (removed_heap == nullptr) {
-    std::cout << "i am null";
-  }
+  cout<<"that's all" << endl;
+  main_heap = main_heap->removeHeap(main_heap);
+  main_heap->printHeap(main_heap);
 
   return 0;
 }
