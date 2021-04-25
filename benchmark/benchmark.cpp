@@ -37,27 +37,47 @@ void demoWrite(string &data, string& path_to_results) {
 }
 
 int main() {
+  vector<string> methods{"make_heap", "remove_heap", "extract_min"};
+  vector<string> trials{"1", "2", "3", "4", "5", "6", "7", "8", "9", "10"};
+  vector<string> volumes{"100", "500", "1000", "5000", "750000", "1000000", "2500000", "5000000"};
+  vector<string> sets{"01", "02", "03", "04", "05", "06", "07", "08", "09", "10"};
 
-  string p = "/insert/01/100.csv";
   const auto path_to_data_folder = string(kDatasetPath);
-  string new_path = path_to_data_folder + p;
-  cout << new_path << endl;
+  cout << path_to_data_folder << endl;
 
-  vector<int> vec = createVectorFromCSV(new_path);
-
-  for (int n: vec) {
-    cout << n << ' ';
+  string path_to_csv;
+  for (string method: methods) {
+    for (string set: sets) {
+      for (string volume: volumes) {
+        for (string trial: trials) {
+          path_to_csv = path_to_data_folder + "/" + method + "/" + set + "/" + volume + ".csv";
+          cout << "path to csv:  " << path_to_csv << endl;
+        }
+      }
+    }
   }
-  cout << vec.size() << " <-- size";
 
-  string path_to_results_main = string(kDatasetPath) + "/results.csv";
-  cout << path_to_results_main << endl;
-  string data_main{"hsjkaj,yua,132,23"};
+//  string p = "/insert/01/100.csv";
+//  const auto path_to_data_folder = string(kDatasetPath);
+//  string new_path = path_to_data_folder + p;
+//  cout << new_path << endl;
 
 
-  demoWrite(data_main, path_to_results_main);
-  demoWrite(data_main, path_to_results_main);
-  demoWrite(data_main, path_to_results_main);
-  demoWrite(data_main, path_to_results_main);
+//  vector<int> vec = createVectorFromCSV(new_path);
+//
+//  for (int n: vec) {
+//    cout << n << ' ';
+//  }
+//  cout << vec.size() << " <-- size";
+//
+//  string path_to_results_main = string(kDatasetPath) + "/results.csv";
+//  cout << path_to_results_main << endl;
+//  string data_main{"hsjkaj,yua,132,23"};
+
+
+//  demoWrite(data_main, path_to_results_main);
+//  demoWrite(data_main, path_to_results_main);
+//  demoWrite(data_main, path_to_results_main);
+//  demoWrite(data_main, path_to_results_main);
   return 0;
 }
