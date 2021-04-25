@@ -1,4 +1,4 @@
-# Название семестровой работы
+# Binomial heap
 
 В этом проекте реализуется структура [Binomial heap](https://en.wikipedia.org/wiki/Binomial_heap), представляющая собой связный список биномиальных деревьев.
 Такая структура данных используется при реализации [priority queue](https://en.wikipedia.org/wiki/Priority_queue#:~:text=In%20computer%20science%2C%20a%20priority,an%20element%20with%20low%20priority.).
