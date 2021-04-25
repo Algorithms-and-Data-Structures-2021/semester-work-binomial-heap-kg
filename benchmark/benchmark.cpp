@@ -45,39 +45,46 @@ int main() {
   const auto path_to_data_folder = string(kDatasetPath);
   cout << path_to_data_folder << endl;
 
+  string path_to_results = string(kDatasetPath) + "/results.csv";
+  cout << "path to results: " << path_to_results << endl;
+
   string path_to_csv;
+  string measurement_results;
   for (string method: methods) {
     for (string set: sets) {
       for (string volume: volumes) {
         for (string trial: trials) {
           path_to_csv = path_to_data_folder + "/" + method + "/" + set + "/" + volume + ".csv";
-          cout << "path to csv:  " << path_to_csv << endl;
+          cout << "path to csv:  " << path_to_csv << " trial: " << trial << endl;
+
+          auto vect = createVectorFromCSV(path_to_csv);
+
+          auto begin_make = chrono::high_resolution_clock::now();
+          auto *h = new BinomialHeap();
+          h = h->makeHeap(h, vect);
+          auto end_make = chrono::high_resolution_clock::now();
+          auto elapsed_make = chrono::duration_cast<chrono::milliseconds>(end_make - begin_make);
+          cout << elapsed_make.count() << endl;
+
+          auto begin_extract = chrono::high_resolution_clock::now();
+          h = h->extractMin(h);
+          auto end_extract = chrono::high_resolution_clock::now();
+          auto elapsed_extract = chrono::duration_cast<chrono::milliseconds>(end_extract - begin_extract);
+          cout << elapsed_extract.count() << endl;
+
+          auto begin_remove = chrono::high_resolution_clock::now();
+          h = h->removeHeap(h);
+          auto end_remove = chrono::high_resolution_clock::now();
+          auto elapsed_remove = chrono::duration_cast<chrono::milliseconds>(end_remove - begin_remove);
+          cout << elapsed_remove.count() << endl;
+
+          measurement_results.clear();
+          measurement_results = set + ',' + volume + ',' + trial + ',' + to_string(elapsed_make.count()) + ',' + to_string(elapsed_extract.count()) + ',' + to_string(elapsed_remove.count());
+
+          demoWrite(measurement_results, path_to_results);
         }
       }
     }
   }
-
-//  string p = "/insert/01/100.csv";
-//  const auto path_to_data_folder = string(kDatasetPath);
-//  string new_path = path_to_data_folder + p;
-//  cout << new_path << endl;
-
-
-//  vector<int> vec = createVectorFromCSV(new_path);
-//
-//  for (int n: vec) {
-//    cout << n << ' ';
-//  }
-//  cout << vec.size() << " <-- size";
-//
-//  string path_to_results_main = string(kDatasetPath) + "/results.csv";
-//  cout << path_to_results_main << endl;
-//  string data_main{"hsjkaj,yua,132,23"};
-
-
-//  demoWrite(data_main, path_to_results_main);
-//  demoWrite(data_main, path_to_results_main);
-//  demoWrite(data_main, path_to_results_main);
-//  demoWrite(data_main, path_to_results_main);
   return 0;
 }
