@@ -26,5 +26,11 @@ int main(int argc, char *argv[]) {
   main_heap = main_heap->removeHeap(main_heap);
   main_heap->printHeap(main_heap);
 
+  vector<int>data_for_heap{6, 1, 4, 5, 8, 2, 4, 3, 9};
+  itis::BinomialHeap *main_heap2 = new itis::BinomialHeap();
+  main_heap2 = main_heap2->makeHeap(data_for_heap);
+  std::cout << "new heap: " << endl;
+  main_heap2->printHeap(main_heap2);
+
   return 0;
 }

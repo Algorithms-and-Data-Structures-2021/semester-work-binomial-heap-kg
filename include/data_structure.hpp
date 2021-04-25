@@ -2,6 +2,7 @@
 #include <list>
 #include <algorithm>
 #include <iostream>
+#include <vector>
 // Заголовочный файл с объявлением структуры данных
 
 namespace itis {
@@ -47,6 +48,8 @@ namespace itis {
     BinomialHeap *removeMinFromTreeReturnBHeap(Node *tree);
 
     BinomialHeap *removeHeap(BinomialHeap *heap);
+
+    BinomialHeap *makeHeap(std::vector<int> input_data);
 
     void printTree(Node *h);
 

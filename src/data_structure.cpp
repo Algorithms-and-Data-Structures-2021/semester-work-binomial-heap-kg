@@ -160,6 +160,14 @@ namespace itis {
     return heap;
   }
 
+  BinomialHeap *BinomialHeap::makeHeap(std::vector<int> input_data) {
+    BinomialHeap *heap = new BinomialHeap();
+    for (int &number: input_data) {
+      heap = heap->insert(heap, number);
+    }
+    return heap;
+  }
+
   void BinomialHeap::printTree(Node *h) {
     while (h) {
       std::cout << "| " << h->data << " " << "degree: " << h->degree << " |    ";
