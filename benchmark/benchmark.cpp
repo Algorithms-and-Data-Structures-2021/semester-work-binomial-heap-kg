@@ -13,24 +13,21 @@ using namespace itis;
 
 static constexpr auto kDatasetPath = string_view{PROJECT_DATASET_DIR};
 
-BinomialHeap *readCSVReturnHeap(string &path) {
-  BinomialHeap *heap = new BinomialHeap();
-
+vector<int> createVectorFromCSV(string &path) {
   fstream fin;
   fin.open(path, ios::in);
-  vector<string> row;
+
   string temp;
   fin >> temp;
   istringstream ss(temp);
-  string token;
 
-  while (getline(ss, token, ',')) {
-    cout << token << endl;
-    heap = heap->insert(heap, stoi(token));
-    heap->printHeap(heap);
-    cout << endl;
-  }
-  return heap;
+  string token;
+  vector<int> numbers;
+
+  while (getline(ss, token, ','))
+    numbers.push_back(stoi(token));
+
+  return numbers;
 }
 
 int main() {
@@ -39,9 +36,12 @@ int main() {
   string new_path = path_to_data_folder + p;
   cout << new_path << endl;
 
-  auto *new_heap = readCSVReturnHeap(new_path);
-  cout << "MAIN HEAP" << endl;
-  new_heap->printHeap(new_heap);
+  vector<int> vec = createVectorFromCSV(new_path);
+
+  for (int n: vec) {
+    cout << n << ' ';
+  }
+  cout << vec.size() << " <-- size";
 
   return 0;
 }
