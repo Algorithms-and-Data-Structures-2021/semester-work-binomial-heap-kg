@@ -4,7 +4,7 @@ import os
 
 
 names_of_sets = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10']
-methods = ['insert', 'extract_min', 'get_min']
+methods = ['make_heap', 'extract_min', 'remove_heap']
 number_of_elements_list = [100,  500, 1000, 5000, 750000, 1000000, 2500000, 5000000]
 border = 10 ** 9
 
